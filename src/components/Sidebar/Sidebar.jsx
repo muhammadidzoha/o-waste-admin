@@ -13,7 +13,7 @@ import {
 } from "@material-tailwind/react";
 import React, { useState } from "react";
 import routes from "../../routes/routes";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { IoMdArrowDropdown } from "react-icons/io";
 import PropTypes from "prop-types";
 
@@ -119,47 +119,52 @@ const Sidebar = ({ isLoggedIn }) => {
                               className="flex flex-col"
                             >
                               {route.subRoutes.map((subRoute) => (
-                                <Typography
+                                <Link
                                   key={subRoute.id}
-                                  as="a"
-                                  href={`${route.layout}/${route.path}/${subRoute.path}`}
+                                  to={`${route.layout}/${route.path}/${subRoute.path}`}
                                   onClick={handleMobileSubMenuClick}
-                                  variant="small"
-                                  className="font-medium mt-3"
-                                  color="gray"
                                 >
-                                  <MenuItem>{subRoute.name}</MenuItem>
-                                </Typography>
+                                  <Typography
+                                    key={subRoute.id}
+                                    as="div"
+                                    variant="small"
+                                    className="font-medium mt-3"
+                                    color="gray"
+                                  >
+                                    <MenuItem>{subRoute.name}</MenuItem>
+                                  </Typography>
+                                </Link>
                               ))}
                             </Collapse>
                           </div>
                         </>
                       ) : (
-                        <Typography
-                          as="a"
-                          variant="small"
-                          className="font-medium"
-                          href={`${route.layout}/${route.path}`}
-                        >
-                          <ListItem
-                            className={`${
-                              activeRoute(route.path) === true
-                                ? "bg-[#004D3D] text-white hover:!bg-[#004D3D] hover:!text-white"
-                                : "bg-transparent"
-                            }`}
+                        <Link to={`${route.layout}/${route.path}`}>
+                          <Typography
+                            as="div"
+                            variant="small"
+                            className="font-medium"
                           >
-                            <ListItemPrefix
+                            <ListItem
                               className={`${
                                 activeRoute(route.path) === true
-                                  ? "text-white"
-                                  : "text-gray-600"
+                                  ? "bg-[#004D3D] text-white hover:!bg-[#004D3D] hover:!text-white"
+                                  : "bg-transparent"
                               }`}
                             >
-                              {route.icon}
-                            </ListItemPrefix>
-                            {route.name}
-                          </ListItem>
-                        </Typography>
+                              <ListItemPrefix
+                                className={`${
+                                  activeRoute(route.path) === true
+                                    ? "text-white"
+                                    : "text-gray-600"
+                                }`}
+                              >
+                                {route.icon}
+                              </ListItemPrefix>
+                              {route.name}
+                            </ListItem>
+                          </Typography>
+                        </Link>
                       )}
                     </List>
                   );
