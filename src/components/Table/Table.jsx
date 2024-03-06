@@ -29,9 +29,9 @@ const Table = ({ columnsData, tableData }) => {
                   className="[&:nth-child(8)]:text-center last:text-center bg-lightPrimary p-4"
                 >
                   <Typography
-                    variant="small"
+                    as="div"
                     color="gray"
-                    className="font-normal leading-none"
+                    className="font-normal leading-none text-sm"
                   >
                     {header.column.columnDef.header}
                   </Typography>
@@ -49,9 +49,9 @@ const Table = ({ columnsData, tableData }) => {
                   className="p-4 border-b border-navy-800 max-w-[850px]"
                 >
                   <Typography
-                    variant="small"
+                    as="div"
                     color="gray"
-                    className="font-normal"
+                    className="font-normal text-sm"
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </Typography>

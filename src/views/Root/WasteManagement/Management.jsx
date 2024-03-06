@@ -1,9 +1,16 @@
+import { Card, CardBody, Typography } from "@material-tailwind/react";
 import React from "react";
 
 const Management = () => {
   return (
     <div>
-      <h1>Management</h1>
+      <Card>
+        <CardBody>
+          <Typography variant="h2" className="text-center">
+            Sorry, This Page Is Under-Construction
+          </Typography>
+        </CardBody>
+      </Card>
     </div>
   );
 };

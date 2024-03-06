@@ -62,7 +62,7 @@ const Sidebar = ({ isLoggedIn }) => {
 
                 if (route.layout === "/admin" || route.layout === "/auth") {
                   return (
-                    <List key={route.name} className="w-[350px]">
+                    <List key={route.name} className="3xl:w-[350px]">
                       {route.subRoutes ? (
                         <>
                           <Menu open={open === route.id}>
@@ -93,7 +93,7 @@ const Sidebar = ({ isLoggedIn }) => {
                                   </ListItemPrefix>
                                   {route.name}
                                   <IoMdArrowDropdown
-                                    className={`block h-4 w-4 transition-transform ml-[105px] ${
+                                    className={`block h-4 w-4 transition-transform 3xl:ml-[105px] ${
                                       open === route.id ? "rotate-180" : ""
                                     }`}
                                   />

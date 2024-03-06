@@ -1,9 +1,16 @@
+import { Card, CardBody, Typography } from "@material-tailwind/react";
 import React from "react";
 
 const Transaction = () => {
   return (
     <div>
-      <h1>Transaction</h1>
+      <Card>
+        <CardBody>
+          <Typography variant="h2" className="text-center">
+            Sorry, This Page Is Under-Construction
+          </Typography>
+        </CardBody>
+      </Card>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PiEyeSlashLight, PiEyeLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,6 +10,15 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [data, setData] = useState(null);
+  const [role, setRole] = useState("Admin");
+
+  useEffect(() => {
+    const storedData = sessionStorage.getItem("data");
+    if (storedData) {
+      setData(JSON.parse(storedData));
+    }
+  }, []);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -28,12 +37,26 @@ const SignIn = () => {
           headers: {
             "Content-type": "multipart/form-data",
           },
-          withCredentials: "include",
         }
       );
-      sessionStorage.setItem("data", JSON.stringify(response.data));
-      sessionStorage.setItem("isLoggedIn", true);
-      navigate("/");
+
+      if (response.data.Role !== role) {
+        toast.error("Akun ini tidak valid untuk mengakses fitur", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+        sessionStorage.setItem("isLoggedIn", false);
+      } else {
+        sessionStorage.setItem("data", JSON.stringify(response.data));
+        sessionStorage.setItem("isLoggedIn", true);
+
+        navigate("/");
+      }
     } catch (error) {
       toast.error(error.response.data.status, {
         position: "top-right",
