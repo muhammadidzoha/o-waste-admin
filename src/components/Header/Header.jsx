@@ -12,12 +12,15 @@ import {
 } from "@material-tailwind/react";
 import React from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ currentRoute, username }) => {
+  const navigate = useNavigate();
+
   const logout = () => {
     sessionStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("data");
-    window.location.reload();
+    navigate("/auth/sign-in");
   };
 
   const getPathnames = () => {
